@@ -19,6 +19,7 @@
 0/z_index = 0
 
 [node name="HallwayFloor" type="TileMap"]
+z_index = -1
 tile_set = SubResource( 1 )
 cell_size = Vector2( 48, 32 )
 format = 1

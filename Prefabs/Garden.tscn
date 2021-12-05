@@ -7,7 +7,7 @@
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 96, 192, 96, 96 )
+0/region = Rect2( 288, 96, 96, 96 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
@@ -18,7 +18,10 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[node name="GymFloor" type="TileMap"]
+[node name="Garden" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+z_index = -1
 tile_set = SubResource( 1 )
 cell_size = Vector2( 48, 32 )
 format = 1
