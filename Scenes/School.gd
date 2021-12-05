@@ -15,6 +15,7 @@ const CORNERS = {TOPLEFT=[0, 0], TOPRIGHT=[9,0], BOTLEFT=[0,9], BOTRIGHT=[9,9]}
 var direction = GORIGHT
 var state = PLAYERTURN
 var map = []
+var indices = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var time = OS.get_time()
@@ -38,6 +39,7 @@ func fill_map(rooms, size):
 	var cafeterias = 0
 	for i in range(size):
 		map.append([])
+		indices.append([])
 		for j in range(size):
 			# Rooms are populated on the edges of the map like Monopoly
 			if (i == 0 or i == (size-1) or j == 0 or j == (size-1)):
@@ -51,9 +53,11 @@ func fill_map(rooms, size):
 					random_num = rand.randi_range(0, 1)
 				var object = rooms[random_num]
 				map[i].append(object.instance())
+				indices[i].append(random_num)
 			# A patch of grass will represent the middle of the map
 			else:
 				map[i].append(rooms[4].instance())
+				indices[i].append(4)
 	return map
 	
 func set_room_positions(map):
@@ -74,14 +78,15 @@ func _process(delta):
 			label.text = ""
 			move_player(steps)
 			state = PLAYERTURN
-	pass
 
 func move_player(steps):
 	if steps == 0:
+		process_space()
 		return
 	var current_position = pawn.position
 	var map_position = [pawn.position.x/192, pawn.position.y/192]
-	print(compare_arrays(map_position, CORNERS.TOPLEFT))
+	print("map position", map_position)
+#	print(compare_arrays(map_position, CORNERS.TOPLEFT))
 	if compare_arrays(map_position, CORNERS.TOPLEFT):
 		direction = GORIGHT
 	elif compare_arrays(map_position, CORNERS.TOPRIGHT):
@@ -106,7 +111,25 @@ func move_player(steps):
 	yield(get_tree().create_timer(.5), "timeout")
 	move_player(steps - 1)	
 	
-	
+func process_space():
+	var position_on_board = indices[pawn.position.x/192][pawn.position.y/192]
+	print(pawn.position.x/192)
+	print(pawn.position.y/192)
+	print(position_on_board)
+	match position_on_board:
+		CLASSROOM:
+			print("in classroom")
+			print("intelligence:", character.intelligence)
+		HALLWAY:
+			print("in hallway")
+		CAFETERIA:
+			print("in cafeteria")
+			print("health: ", character.health)
+		PLAYGROUND:
+			print("in playground")
+			print("strength: ", character.strength)
+	print()
+	return 0
 
 func compare_arrays(array1, array2):
 	if array1.size() != array2.size():
