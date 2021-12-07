@@ -5,12 +5,49 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -512.0
+margin_left = -517.946
 margin_top = -600.0
-margin_right = 512.0
+margin_right = 506.054
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Options" type="HBoxContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -360.0
+margin_top = -69.5
+margin_right = 360.0
+margin_bottom = 69.5
+custom_constants/separation = 60
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Option1" type="Button" parent="Options"]
+margin_right = 200.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 200, 100 )
+clip_text = true
+__meta__ = {
+"_editor_description_": "		"
+}
+
+[node name="Option2" type="Button" parent="Options"]
+margin_left = 260.0
+margin_right = 460.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 200, 100 )
+
+[node name="Option3" type="Button" parent="Options"]
+margin_left = 520.0
+margin_right = 720.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 200, 100 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.141
@@ -29,7 +66,7 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_top = 4.0
-margin_right = 199.0
+margin_right = 200.0
 margin_bottom = 35.0
 text = "Press 'Space' To Roll Dice
 "
