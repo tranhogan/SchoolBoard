@@ -4,7 +4,10 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var intelligence = 0
+var strength = 0
+var health = 5
+var max_health = 10
 var direction = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():

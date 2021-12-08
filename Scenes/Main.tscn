@@ -12,27 +12,29 @@
 script = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 6
 
 [node name="Prompt" parent="CanvasLayer" instance=ExtResource( 3 )]
-margin_left = -516.44
-margin_top = -602.682
-margin_right = 507.56
-margin_bottom = -2.68201
+margin_left = -134.44
+margin_top = -138.682
+margin_right = 889.56
+margin_bottom = 461.318
+rect_scale = Vector2( 0.613645, 0.613645 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 105.396, 127.459 )
+position = Vector2( 700, 900 )
 current = true
+zoom = Vector2( 2, 2 )
 script = ExtResource( 1 )
 
 [node name="CharacterOffset" type="Sprite" parent="."]
 visible = false
-scale = Vector2( 0.7864, 0.792124 )
 z_index = 1
 texture = ExtResource( 2 )
 
 [node name="EnemyOffset" type="Sprite" parent="."]
 visible = false
-position = Vector2( 1920, 1920 )
+position = Vector2( 1728, 1728 )
 texture = ExtResource( 6 )
 
 [node name="Character" parent="." instance=ExtResource( 5 )]
