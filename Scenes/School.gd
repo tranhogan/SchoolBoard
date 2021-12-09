@@ -16,7 +16,7 @@ onready var actors = [get_node("CharacterOffset"), get_node("Character"), get_no
 onready var label = get_node("CanvasLayer/Prompt/VBoxContainer/Label")
 enum {PLAYERTURN, PLAYERMOVE, PLAYERPROCESS, ENEMYTURN, ENEMYMOVE, ENEMYPROCESS, ROUNDEND}
 enum {GOLEFT, GORIGHT, GOUP, GODOWN} 
-enum {MORE_INT, MORE_STR, MORE_HP, DOUBLE_STR, MORE_MAX_HP, HALF_NEXT_DAMG}
+enum {MORE_INT, MORE_STR, MORE_HP, DOUBLE_STR, DEAL_INT, DEAL_STR}
 const CORNERS = {TOPLEFT=[0, 0], TOPRIGHT=[9,0], BOTLEFT=[0,9], BOTRIGHT=[9,9]}
 var state = PLAYERTURN
 var map = []
@@ -140,6 +140,7 @@ func move_actor(steps, actors, is_player):
 	if is_player:
 		state = ENEMYTURN
 	else:
+		end_of_round()
 		state = PLAYERTURN
 
 
@@ -183,6 +184,8 @@ func process_space(actors, is_player, indices, current_room):
 			label.text = actor_name + " gained +1 intelligence!"
 			if is_player:
 				player_int.set_text(str(actor.intelligence))
+				if actor.intelligence == 10:
+					game_over(0)
 			else:
 				enemy_int.set_text(str(actor.intelligence))
 		HALLWAY:
@@ -197,9 +200,11 @@ func process_space(actors, is_player, indices, current_room):
 			yield(get_tree().create_timer(1.5), "timeout")
 			label.text = actor_name + " gained +1 health!"
 			if is_player:
-				player_int.set_text(str(actor.intelligence))
+				player_hp.set_text(str(actor.health))
+				if actor.health == 0:
+					game_over(1)
 			else:
-				enemy_int.set_text(str(actor.intelligence))
+				enemy_hp.set_text(str(actor.health))
 		PLAYGROUND:
 			print("in playground")
 			actor.strength += 1 
@@ -207,9 +212,11 @@ func process_space(actors, is_player, indices, current_room):
 			yield(get_tree().create_timer(1.5), "timeout")
 			label.text = actor_name + " gained +1 strength!"
 			if is_player:
-				player_int.set_text(str(actor.strength))
+				player_str.set_text(str(actor.strength))
+				if actor.strength == 10:
+					game_over(2)
 			else:
-				enemy_int.set_text(str(actor.intelligence))
+				enemy_str.set_text(str(actor.strength))
 			
 
 func end_of_round():
@@ -217,7 +224,7 @@ func end_of_round():
 	
 func set_options():
 	var options = get_node("CanvasLayer/Prompt/Options")
-	options.set_visible(true)
+#	options.set_visible(true)
 	var options_list = []
 	var response_list = []
 #	var option1 = options.get_child(0)
@@ -228,6 +235,7 @@ func set_options():
 		var response = rand.randi_range(0, 5)
 		response_list.append(response)
 		set_response(options_list, i, response)
+	options.set_visible(true)
 
 
 func set_response(list, index, response):
@@ -241,10 +249,10 @@ func set_response(list, index, response):
 			option.text = "+5 HP"
 		DOUBLE_STR:
 			option.text = "2x Strength"
-		MORE_MAX_HP:
-			option.text = "+5 Max HP"
-		HALF_NEXT_DAMG:
-			option.text = "Half next damage"
+		DEAL_INT:
+			option.text = "Deal INT as DMG to enemy"
+		DEAL_STR:
+			option.text = "Deal STR as DMG to enemy"
 		
 
 func game_over(condition):

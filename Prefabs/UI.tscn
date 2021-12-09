@@ -13,10 +13,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -360.0
-margin_top = -69.5
-margin_right = 360.0
-margin_bottom = 69.5
+margin_left = -348.014
+margin_top = -187.866
+margin_right = 371.986
+margin_bottom = -48.8663
+rect_scale = Vector2( 1.53589, 1.53589 )
 custom_constants/separation = 60
 alignment = 1
 __meta__ = {
@@ -60,10 +61,10 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 4.0
-margin_right = 200.0
-margin_bottom = 35.0
+margin_right = 215.0
+margin_bottom = 48.0
 text = "Press 'Space' To Roll Dice
+Restart Game for Diff Map Layout
 "
 align = 1
 valign = 1
